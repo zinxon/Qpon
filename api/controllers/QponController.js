@@ -36,6 +36,18 @@ module.exports = {
       });
     });
   },
+  detail: function (req, res) {
+    if (req.method == "GET") {
+      Qpon.findOne(req.params.id).exec(function (err, model) {
+        if (model == null)
+          return res.send("No such Qpon!");
+        else
+          return res.view('qpon/detail', {
+            'qpon': model
+          });
+      });
+    } 
+  },
   // delete function
   delete: function (req, res) {
     Qpon.findOne(req.params.id).exec(function (err, model) {

@@ -16,14 +16,14 @@
         <% qpons.reverse().forEach( function(model) { %>
           <% if (model.district=="HK Island" && i<2){%>
             <div class="card" align="middle">
-              <img src="<%= model.image %>" alt="" width="280" height="220">
-              <a href="">
+              <img class="card-img-top" src="<%= model.image %>" alt="" width="280" height="220">
+              <a class="card-title card-link" href="/qpon/detail/<%= model.id %>">
                 <%= model.rest %>
               </a>
-              <p>
+              <p class="card-subtitle mb-2 text-muted">
                 <%= model.title %>
               </p>
-              <p>Coins:
+              <p class="card-text">Coins:
                 <%= model.coin %>
               </p>
             </div>
@@ -36,14 +36,14 @@
         <% qpons.reverse().forEach( function(model) { %>
           <% if (model.district=="Kowloon" && i<2){%>
             <div class="card" align="middle">
-              <img src="<%= model.image %>" alt="" width="280" height="220">
-              <a href="">
+              <img class="card-img-top" src="<%= model.image %>" alt="" width="280" height="220">
+              <a class="card-title card-link" href="/qpon/detail/<%= model.id %>">
                 <%= model.rest %>
               </a>
-              <p>
+              <p class="card-subtitle mb-2 text-muted">
                 <%= model.title %>
               </p>
-              <p>Coins:
+              <p class="card-text">Coins:
                 <%= model.coin %>
               </p>
             </div>
@@ -57,14 +57,14 @@
         <% qpons.reverse().forEach( function(model) { %>
           <% if (model.district=="New Territories" && i<2){%>
             <div class="card" align="middle">
-              <img src="<%= model.image %>" alt="" width="280" height="220">
-              <a href="">
+              <img class="card-img-top" src="<%= model.image %>" alt="" width="280" height="220">
+              <a class="card-title card-link" href="/qpon/detail/<%= model.id %>">
                 <%= model.rest %>
               </a>
-              <p>
+              <p class="card-subtitle mb-2 text-muted">
                 <%= model.title %>
               </p>
-              <p>Coins:
+              <p class="card-text">Coins:
                 <%= model.coin %>
               </p>
             </div>
@@ -77,3 +77,5 @@
 </body>
 
 </html>
+
+

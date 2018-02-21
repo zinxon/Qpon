@@ -1,0 +1,33 @@
+<form action="/qpon/detail/<%= qpon.id %>" method="POST">
+  <div class="row form-group">
+    <div class="col-12 col-lg-5">
+      <img class="img-fluid rounded" src="<%= qpon.image%>" alt="">
+    </div>
+    <div class="col-12 col-lg-7">
+      <ul>
+        <li class="list-group-item font-weight-bold">
+          <%= qpon.rest%>
+        </li>
+        <li class="list-group-item font-weight-bold">
+          <%= qpon.title%>
+        </li>
+        <li class="list-group-item">
+          <strong>Coins:</strong>
+          <%= qpon.coin%>
+        </li>
+        <li class="list-group-item">
+          <strong>Address:</strong>
+          <%= qpon.mall%>,
+            <%= qpon.district%>
+        </li>
+        <li class="list-group-item">
+          <strong>Valid Till:</strong>
+          <%= qpon.date%>
+        </li>
+        <li class="list-group-item">
+          <%= qpon.details%>
+        </li>
+      </ul>
+    </div>
+  </div>
+</form>
