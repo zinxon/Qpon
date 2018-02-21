@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Q-pon</title>
+
+</head>
+
+<body>
+  <div class="row">
+    <div class="col-12 col-lg-4">HK IsIand
+      <%var i=0;%>
+        <% qpons.reverse().forEach( function(model) { %>
+          <% if (model.district=="HK Island" && i<2){%>
+            <div class="card" align="middle">
+              <img src="<%= model.image %>" alt="" width="280" height="220">
+              <a href="">
+                <%= model.rest %>
+              </a>
+              <p>
+                <%= model.title %>
+              </p>
+              <p>Coins:
+                <%= model.coin %>
+              </p>
+            </div>
+            <br>
+            <%i++%>
+              <% }}); %>
+    </div>
+    <div class="col-12 col-lg-4">Kowloon
+      <%var i=0;%>
+        <% qpons.reverse().forEach( function(model) { %>
+          <% if (model.district=="Kowloon" && i<2){%>
+            <div class="card" align="middle">
+              <img src="<%= model.image %>" alt="" width="280" height="220">
+              <a href="">
+                <%= model.rest %>
+              </a>
+              <p>
+                <%= model.title %>
+              </p>
+              <p>Coins:
+                <%= model.coin %>
+              </p>
+            </div>
+            <br>
+            <%i++%>
+              <% }}); %>
+
+    </div>
+    <div class="col-12 col-lg-4">New Territories
+      <%var i=0;%>
+        <% qpons.reverse().forEach( function(model) { %>
+          <% if (model.district=="New Territories" && i<2){%>
+            <div class="card" align="middle">
+              <img src="<%= model.image %>" alt="" width="280" height="220">
+              <a href="">
+                <%= model.rest %>
+              </a>
+              <p>
+                <%= model.title %>
+              </p>
+              <p>Coins:
+                <%= model.coin %>
+              </p>
+            </div>
+            <br>
+            <%i++%>
+              <% }}); %>
+    </div>
+
+  </div>
+</body>
+
+</html>

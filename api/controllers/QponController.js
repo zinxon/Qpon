@@ -29,6 +29,13 @@ module.exports = {
       });
     });
   },
+  index: function (req, res) {
+    Qpon.find().exec(function (err, qpons) {
+      return res.view('qpon/index', {
+        'qpons': qpons
+      });
+    });
+  },
   // delete function
   delete: function (req, res) {
     Qpon.findOne(req.params.id).exec(function (err, model) {
@@ -68,8 +75,10 @@ module.exports = {
     }
   },
   search: function (req, res) {
-
-    
-
+    Qpon.find().exec(function (err, qpons) {
+      return res.view('qpon/search', {
+        'qpons': qpons
+      });
+    });
   },
 };

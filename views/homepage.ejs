@@ -10,7 +10,76 @@
 </head>
 
 <body>
+  
+  <div class="row form-group">
+    <div class="col-12 col-lg-4">HK Island
+      <div class="card qpon-info-hk1" align="middle">
+        <img src="https://4.bp.blogspot.com/-BOCREOV1bn4/We25blAFk-I/AAAAAAABNq4/DQ6I9-4htTgBxTgDXsqVLfljwGJLyBdmwCLcBGAs/s640/50.jpg"
+          alt="" height="200" width="280">
+        <a href="">
 
+        </a>
+      </div>
+      <div class="card qpon-info-hk2" align="middle">
+        <img src="https://4.bp.blogspot.com/-BOCREOV1bn4/We25blAFk-I/AAAAAAABNq4/DQ6I9-4htTgBxTgDXsqVLfljwGJLyBdmwCLcBGAs/s640/50.jpg"
+          alt="" height="200" width="280">
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-4">Kowloon
+      <div class="card qpon-info-kl1" align="middle">
+        <img src="https://4.bp.blogspot.com/-BOCREOV1bn4/We25blAFk-I/AAAAAAABNq4/DQ6I9-4htTgBxTgDXsqVLfljwGJLyBdmwCLcBGAs/s640/50.jpg"
+          alt="" height="200" width="280">
+        <a href="">
+        </a>
+      </div>
+      <div class="card qpon-info-kl2" align="middle">
+        <img src="https://4.bp.blogspot.com/-BOCREOV1bn4/We25blAFk-I/AAAAAAABNq4/DQ6I9-4htTgBxTgDXsqVLfljwGJLyBdmwCLcBGAs/s640/50.jpg"
+          alt="" height="200" width="280">
+        <a href="">
+        </a>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-4">New Territories
+      <div class="card qpon-info-nt1" align="middle">
+        <img src="https://4.bp.blogspot.com/-BOCREOV1bn4/We25blAFk-I/AAAAAAABNq4/DQ6I9-4htTgBxTgDXsqVLfljwGJLyBdmwCLcBGAs/s640/50.jpg"
+          alt="" height="200" width="280">
+        <a href="">
+        </a>
+      </div>
+      <div class="card qpon-info-nt2" align="middle">
+        <img src="https://4.bp.blogspot.com/-BOCREOV1bn4/We25blAFk-I/AAAAAAABNq4/DQ6I9-4htTgBxTgDXsqVLfljwGJLyBdmwCLcBGAs/s640/50.jpg"
+          alt="" height="200" width="280">
+        <a href="">
+        </a>
+      </div>
+    </div>
+  </div>
+  
 </body>
 
 </html>
+<script>
+  function groupBy(array, f) {
+    var groups = {};
+    array.forEach(function (o) {
+      var group = JSON.stringify(f(o));
+      groups[group] = groups[group] || [];
+      groups[group].push(o);
+    });
+    return Object.keys(groups).map(function (group) {
+      return groups[group];
+    });
+  }
+
+  // USING IT
+
+  var sorted = groupBy(qpons, function (item) {
+    return [item.district];
+  });
+
+
+  console.log(sorted[1][0].title)
+
+</script>
