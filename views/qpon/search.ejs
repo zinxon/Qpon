@@ -1,14 +1,22 @@
-<form action="./search" method="GET" name="search">
+<form action="./search" method="POST" name="search">
   <div class="row">
-    <div class="col-12 col-lg-8 left">
-      <div class="col-12 col-lg-4">
-        <% qpons.forEach( function(model) {  %>
-          <%= model.rest%>
-            <% });%>
-      </div>
-      <div class="col-12 col-lg-4">
-      </div>
-    </div>
+    <!-- <div class="col-12 col-lg-8 left"> -->
+      <% qpons.forEach( function(model) { %>
+        <div class="card col-12 col-lg-4" align="middle">
+          <img class="card-img-top" src="<%= model.image %>" alt="" width="280" height="220">
+          <a class="card-title card-link" href="/qpon/detail/<%= model.id %>">
+            <%= model.rest %>
+          </a>
+          <p class="card-subtitle mb-2 text-muted">
+            <%= model.title %>
+          </p>
+          <p class="card-text">Coins:
+            <%= model.coin %>
+          </p>
+        </div>
+        <br>
+        <% }); %>
+    <!-- </div> -->
     <div class="col-12 col-lg-4 search">
       <h5>
         Search
@@ -16,13 +24,13 @@
       <label>District</label>
       <select class="form-control" name="sDist">
         <option value="all">All Districts</option>
-        <option value="HK Island">HK Island</option>
-        <option value="Kowloon">Kowloon</option>
-        <option value="New Territories">New Territories</option>
+        <option value="hk">HK Island</option>
+        <option value="kl">Kowloon</option>
+        <option value="nt">New Territories</option>
       </select>
       <br>
       <label for="">Coins Range:</label>
-      <input type="text" class="range_03 form-control" name="sRange" value="">
+      <input type="text" class="range_03 form-control" name="sRange">
       <label>Valid Before:</label>
       <input type="text" class="form-control datepicker" name="sDate" data-provide="datepicker">
       <br>

@@ -102,31 +102,64 @@ module.exports = {
 
   search: function (req, res) {
 
-    const qDist = req.body.sDist || "";
-    const qCoinFrom = req.param('from') || "";
-    const qCoinTo = req.param('to') || "";
-    const qDate = req.body.sDate || "";
+    var params = req.params.all();
+    var qDist = params.sDist || "";
+    var qCoinFrom = String(params.sRange).split(';')[0] || "";
+    var qCoinTo = String(params.sRange).split(';')[1]  || "";
+    var qDate = params.sDate || "";
 
-    if (qDist == "all") {
+    // Qpon.find().exec(function (err, qpons) {
+    //   return res.view('qpon/search', {
+    //     'qpons': qpons
+    //   });
+    // });
+
+    var params = req.params.all();
+    console.log(params);
+    console.log("-----");
+    console.log(qDist, qCoinFrom, qCoinTo, qDate);
+    console.log("-----");
+    if (qDist == "") {
       Qpon.find().exec(function (err, qpons) {
         return res.view('qpon/search', {
           'qpons': qpons
         });
       });
-    } else {
+    } else if (qDist == "all" && qCoinFrom != "" && qCoinTo != "" && qDate != "") {
       Qpon.find()
         .where({
-          district: qDist,
-          coin: { '<=': qCoinTo, '>=': qCoinFrom },
-          date: { '<': qDate }
+          coin: {
+            '<=': qCoinTo,
+            '>=': qCoinFrom
+          },
+          date: {
+            '<': qDate
+          }
         })
         .exec(function (err, qpons) {
           return res.view('qpon/search', {
             'qpons': qpons
           });
         });
-    }
+    } else {
+      Qpon.find()
+        .where({
+          district: qDist,
+          coin: {
+            '<=': qCoinTo,
+            '>=': qCoinFrom
+          },
+          date: {
+            '<': qDate
+          }
+        })
+        .exec(function (err, qpons) {
+          return res.view('qpon/search', {
+            'qpons': qpons
+          });
+        });
 
+    }
   },
 
   paginate: function (req, res) {

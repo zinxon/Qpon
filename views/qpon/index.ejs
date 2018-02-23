@@ -14,7 +14,7 @@
     <div class="col-12 col-lg-4">HK IsIand
       <%var i=0;%>
         <% qpons.reverse().forEach( function(model) { %>
-          <% if (model.district=="HK Island" && i<2){%>
+          <% if (model.district=="hk" && i<2){%>
             <div class="card" align="middle">
               <img class="card-img-top" src="<%= model.image %>" alt="" width="280" height="220">
               <a class="card-title card-link" href="/qpon/detail/<%= model.id %>">
@@ -34,7 +34,7 @@
     <div class="col-12 col-lg-4">Kowloon
       <%var i=0;%>
         <% qpons.reverse().forEach( function(model) { %>
-          <% if (model.district=="Kowloon" && i<2){%>
+          <% if (model.district=="kl" && i<2){%>
             <div class="card" align="middle">
               <img class="card-img-top" src="<%= model.image %>" alt="" width="280" height="220">
               <a class="card-title card-link" href="/qpon/detail/<%= model.id %>">
@@ -55,7 +55,7 @@
     <div class="col-12 col-lg-4">New Territories
       <%var i=0;%>
         <% qpons.reverse().forEach( function(model) { %>
-          <% if (model.district=="New Territories" && i<2){%>
+          <% if (model.district=="nt" && i<2){%>
             <div class="card" align="middle">
               <img class="card-img-top" src="<%= model.image %>" alt="" width="280" height="220">
               <a class="card-title card-link" href="/qpon/detail/<%= model.id %>">
