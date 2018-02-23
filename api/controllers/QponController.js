@@ -46,7 +46,7 @@ module.exports = {
             'qpon': model
           });
       });
-    } 
+    }
   },
   // delete function
   delete: function (req, res) {
@@ -86,10 +86,46 @@ module.exports = {
       });
     }
   },
+  // search function
+  // search: function (req, res) {
+  //   Qpon.find().exec(function (err, qpons) {
+  //     if (err) {
+  //       return res.serverError(err);
+  //     } else {
+  //       return res.view('qpon/search', {
+  //         'qpons': qpons
+  //       });
+  //     }
+  //   });
+  // },
+
+
   search: function (req, res) {
-    Qpon.find().exec(function (err, qpons) {
-      return res.view('qpon/search', {
-        'qpons': qpons
+    Qpon.find()
+      .where({
+        district: 's-district'
+      })
+      .exec(function (err, qpons) {
+        return res.view('qpon/search', {
+          'qpons': qpons
+        });
+      });
+  },
+
+  paginate: function (req, res) {
+
+    const qPage = req.query.page || 1;
+
+    Qpon.find().paginate({
+      page: qPage,
+      limit: 2
+    }).exec(function (err, qpons) {
+      Qpon.count().exec(function (err, value) {
+        var pages = Math.ceil(value / 2);
+        return res.view('qpon/paginate', {
+          'qpons': qpons,
+          'count': pages
+        });
       });
     });
   },
