@@ -134,6 +134,11 @@
 </html>
 
 <script>
+  var saveResult = function (data) {
+    from = data.from;
+    to = data.to;
+  };
+
   $(function () {
     $(".range_03").ionRangeSlider({
       // hide_min_max: true,
@@ -145,7 +150,12 @@
       type: 'double',
       step: 1,
       prefix: "$",
-      grid: true
+      grid: true,
+      onStart: function (data) {
+        saveResult(data);
+      },
+      onChange: saveResult,
+      onFinish: saveResult
     });
   });
 

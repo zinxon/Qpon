@@ -1,4 +1,4 @@
-<form action="./search" method="POST">
+<form action="./search" method="GET" name="search">
   <div class="row">
     <div class="col-12 col-lg-8 left">
       <div class="col-12 col-lg-4">
@@ -14,7 +14,7 @@
         Search
       </h5>
       <label>District</label>
-      <select class="form-control" name="s-district">
+      <select class="form-control" name="sDist">
         <option value="all">All Districts</option>
         <option value="HK Island">HK Island</option>
         <option value="Kowloon">Kowloon</option>
@@ -22,9 +22,9 @@
       </select>
       <br>
       <label for="">Coins Range:</label>
-      <input type="text" class="range_03 form-control" name="s-range" value="">
+      <input type="text" class="range_03 form-control" name="sRange" value="">
       <label>Valid Before:</label>
-      <input type="text" class="form-control datepicker" name="s-date" data-provide="datepicker">
+      <input type="text" class="form-control datepicker" name="sDate" data-provide="datepicker">
       <br>
       <button type="submit" class="btn btn-primary">Submit</button>
     </div>

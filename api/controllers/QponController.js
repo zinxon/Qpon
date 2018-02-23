@@ -101,15 +101,32 @@ module.exports = {
 
 
   search: function (req, res) {
-    Qpon.find()
-      .where({
-        district: 's-district'
-      })
-      .exec(function (err, qpons) {
+
+    const qDist = req.body.sDist || "";
+    const qCoinFrom = req.param('from') || "";
+    const qCoinTo = req.param('to') || "";
+    const qDate = req.body.sDate || "";
+
+    if (qDist == "all") {
+      Qpon.find().exec(function (err, qpons) {
         return res.view('qpon/search', {
           'qpons': qpons
         });
       });
+    } else {
+      Qpon.find()
+        .where({
+          district: qDist,
+          coin: { '<=': qCoinTo, '>=': qCoinFrom },
+          date: { '<': qDate }
+        })
+        .exec(function (err, qpons) {
+          return res.view('qpon/search', {
+            'qpons': qpons
+          });
+        });
+    }
+
   },
 
   paginate: function (req, res) {
