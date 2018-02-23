@@ -1,62 +1,65 @@
 <form action="./search" method="POST" name="search">
   <div class="row">
-    <div class="col-12 col-lg-8 left">
+    <div class="col-12 col-lg-8">
+      <div class="row">
         <% qpons.forEach( function(model) { %>
-        <div class="card col-12 col-lg-6" align="middle">
-          <img class="card-img-top" src="<%= model.image %>" alt="" width="280" height="220">
-          <a class="card-title card-link" href="/qpon/detail/<%= model.id %>">
-            <%= model.rest %>
-          </a>
-          <p class="card-subtitle mb-2 text-muted">
-            <%= model.title %>
-          </p>
-          <p class="card-text">Coins:
-            <%= model.coin %>
-          </p>
-        </div>
-        <!-- <br> -->
-        <% }); %>
+          <div class="card col-12 col-lg-6" align="middle">
+            <img class="card-img-top" src="<%= model.image %>" alt="" width="280" height="220">
+            <a class="card-title card-link" href="/qpon/detail/<%= model.id %>">
+              <%= model.rest %>
+            </a>
+            <p class="card-subtitle mb-2 text-muted">
+              <%= model.title %>
+            </p>
+            <p class="card-text">Coins:
+              <%= model.coin %>
+            </p>
+          </div>
+          <% }); %>
       </div>
-      <div class="col-12 col-lg-4 search">
-        <h5>
-          Search
-        </h5>
-        <label>District</label>
-        <select class="form-control" name="sDist">
-          <option value="all">All Districts</option>
-          <option value="hk">HK Island</option>
-          <option value="kl">Kowloon</option>
-          <option value="nt">New Territories</option>
-        </select>
-        <br>
-        <label for="">Coins Range:</label>
-        <input type="text" class="range_03 form-control" name="sRange">
-        <label>Valid Before:</label>
-        <input type="text" class="form-control datepicker" name="sDate" data-provide="datepicker">
-        <br>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </div>
+      <br>r
+      <% const current = Number(req.query.page || 1); %>
+
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" href="/qpon/search/?page=<%= Math.max(current-1, 1) %>">Previous</a>
+            </li>
+
+            <% for (i = 1; i <= count; i++) { %>
+              <li class="page-item">
+                <a class="page-link" href="/qpon/search/?page=<%= i %>">
+                  <%= i %>
+                </a>
+              </li>
+              <% } %>
+
+                <li class="page-item">
+                  <a class="page-link" href="/qpon/search/?page=<%= Math.min(current+1, count) %>">Next</a>
+                </li>
+          </ul>
+        </nav>
+    </div>
+    <div class="col-12 col-lg-4">
+      <h5>
+        Search
+      </h5>
+      <label>District</label>
+      <select class="form-control" name="sDist">
+        <option value="all">All Districts</option>
+        <option value="hk">HK Island</option>
+        <option value="kl">Kowloon</option>
+        <option value="nt">New Territories</option>
+      </select>
+      <br>
+      <label for="">Coins Range:</label>
+      <input type="text" class="range_03 form-control" name="sRange">
+      <label>Valid Before:</label>
+      <input type="text" class="form-control datepicker" name="sDate" data-provide="datepicker">
+      <br>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
   </div>
   <br>
-  <% const current = Number(req.query.page || 1); %>
 
-    <nav aria-label="Page navigation example">
-      <ul class="pagination">
-        <li class="page-item">
-          <a class="page-link" href="/qpon/search/?page=<%= Math.max(current-1, 1) %>">Previous</a>
-        </li>
-
-        <% for (i = 1; i <= count; i++) { %>
-          <li class="page-item">
-            <a class="page-link" href="/qpon/search/?page=<%= i %>">
-              <%= i %>
-            </a>
-          </li>
-          <% } %>
-
-            <li class="page-item">
-              <a class="page-link" href="/qpon/search/?page=<%= Math.min(current+1, count) %>">Next</a>
-            </li>
-      </ul>
-    </nav>
 </form>
