@@ -102,27 +102,42 @@ module.exports = {
 
   search: function (req, res) {
 
-    var params = req.params.all();
-    var qDist = params.sDist || "";
-    var qCoinFrom = String(params.sRange).split(';')[0] || "";
-    var qCoinTo = String(params.sRange).split(';')[1]  || "";
-    var qDate = params.sDate || "";
+    const qPage = req.query.page || 1;
 
-    // Qpon.find().exec(function (err, qpons) {
-    //   return res.view('qpon/search', {
-    //     'qpons': qpons
+    // Qpon.find().paginate({
+    //   page: qPage,
+    //   limit: 2
+    // }).exec(function (err, persons) {
+    //   Person.count().exec(function (err, value) {
+    //     var pages = Math.ceil(value / 2);
+    //     return res.view('person/paginate', {
+    //       'persons': persons,
+    //       'count': pages
+    //     });
     //   });
     // });
 
     var params = req.params.all();
+    var qDist = params.sDist || "";
+    var qCoinFrom = String(params.sRange).split(';')[0] || "";
+    var qCoinTo = String(params.sRange).split(';')[1] || "";
+    var qDate = params.sDate || "";
+
     console.log(params);
     console.log("-----");
     console.log(qDist, qCoinFrom, qCoinTo, qDate);
     console.log("-----");
     if (qDist == "") {
-      Qpon.find().exec(function (err, qpons) {
-        return res.view('qpon/search', {
-          'qpons': qpons
+      Qpon.find().paginate({
+        page: qPage,
+        limit: 2
+      }).exec(function (err, qpons) {
+        Qpon.count().exec(function (err, value) {
+          var pages = Math.ceil(value / 2);
+          return res.view('qpon/search', {
+            'qpons': qpons,
+            'count': pages
+          });
         });
       });
     } else if (qDist == "all" && qCoinFrom != "" && qCoinTo != "" && qDate != "") {
@@ -158,25 +173,8 @@ module.exports = {
             'qpons': qpons
           });
         });
-
     }
+
   },
 
-  paginate: function (req, res) {
-
-    const qPage = req.query.page || 1;
-
-    Qpon.find().paginate({
-      page: qPage,
-      limit: 2
-    }).exec(function (err, qpons) {
-      Qpon.count().exec(function (err, value) {
-        var pages = Math.ceil(value / 2);
-        return res.view('qpon/paginate', {
-          'qpons': qpons,
-          'count': pages
-        });
-      });
-    });
-  },
 };
