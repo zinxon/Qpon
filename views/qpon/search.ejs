@@ -1,4 +1,4 @@
-<form action="./search" method="POST" name="search">
+<form action="./search?page=<%= Math.max(current-1, 1) %>" method="POST" name="search">
   <div class="row">
     <div class="col-12 col-lg-8">
       <div class="row">
@@ -6,7 +6,9 @@
           <div class="card col-12 col-lg-6" align="middle">
             <img class="card-img-top" src="<%= model.image %>" alt="" width="280" height="220">
             <a class="card-title card-link" href="/qpon/detail/<%= model.id %>">
-              <%= model.rest %>
+              <b>
+                <%= model.rest %>
+              </b>
             </a>
             <p class="card-subtitle mb-2 text-muted">
               <%= model.title %>
@@ -18,7 +20,7 @@
           <% }); %>
       </div>
       <br>
-      <% const current = Number(req.query.page || 1); %>
+      <% var current = Number(req.query.page || 1); %>
 
         <nav aria-label="Page navigation example">
           <ul class="pagination">

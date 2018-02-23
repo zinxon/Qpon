@@ -6,6 +6,7 @@
  */
 
 module.exports = {
+
   // create function
   create: function (req, res) {
     if (req.method == "POST") {
@@ -16,12 +17,15 @@ module.exports = {
       return res.view('qpon/create');
     }
   },
+
   // json function
   json: function (req, res) {
     Qpon.find().exec(function (err, qpons) {
       return res.json(qpons);
     });
   },
+
+  //admin functino
   admin: function (req, res) {
     Qpon.find().exec(function (err, qpons) {
       return res.view('qpon/admin', {
@@ -29,6 +33,8 @@ module.exports = {
       });
     });
   },
+
+  //index function
   index: function (req, res) {
     Qpon.find().exec(function (err, qpons) {
       return res.view('qpon/index', {
@@ -36,6 +42,8 @@ module.exports = {
       });
     });
   },
+
+  //detail function
   detail: function (req, res) {
     if (req.method == "GET") {
       Qpon.findOne(req.params.id).exec(function (err, model) {
@@ -48,6 +56,7 @@ module.exports = {
       });
     }
   },
+
   // delete function
   delete: function (req, res) {
     Qpon.findOne(req.params.id).exec(function (err, model) {
@@ -59,6 +68,7 @@ module.exports = {
       }
     });
   },
+
   // update function
   update: function (req, res) {
     if (req.method == "GET") {
@@ -86,47 +96,23 @@ module.exports = {
       });
     }
   },
+
   // search function
-  // search: function (req, res) {
-  //   Qpon.find().exec(function (err, qpons) {
-  //     if (err) {
-  //       return res.serverError(err);
-  //     } else {
-  //       return res.view('qpon/search', {
-  //         'qpons': qpons
-  //       });
-  //     }
-  //   });
-  // },
-
-
   search: function (req, res) {
-
-    const qPage = req.query.page || 1;
-
-    // Qpon.find().paginate({
-    //   page: qPage,
-    //   limit: 2
-    // }).exec(function (err, persons) {
-    //   Person.count().exec(function (err, value) {
-    //     var pages = Math.ceil(value / 2);
-    //     return res.view('person/paginate', {
-    //       'persons': persons,
-    //       'count': pages
-    //     });
-    //   });
-    // });
 
     var params = req.params.all();
     var qDist = params.sDist || "";
     var qCoinFrom = String(params.sRange).split(';')[0] || "";
     var qCoinTo = String(params.sRange).split(';')[1] || "";
     var qDate = params.sDate || "";
+    var qPage = req.query.page || 1;
 
     console.log(params);
     console.log("-----");
     console.log(qDist, qCoinFrom, qCoinTo, qDate);
     console.log("-----");
+
+
     if (qDist == "") {
       Qpon.find().paginate({
         page: qPage,
@@ -140,6 +126,7 @@ module.exports = {
           });
         });
       });
+
     } else if (qDist == "all" && qCoinFrom != "" && qCoinTo != "" && qDate != "") {
       Qpon.find()
         .where({
@@ -150,12 +137,20 @@ module.exports = {
           date: {
             '<': qDate
           }
+        }).paginate({
+          page: qPage,
+          limit: 2
         })
         .exec(function (err, qpons) {
-          return res.view('qpon/search', {
-            'qpons': qpons
+          Qpon.count().exec(function (err, value) {
+            var pages = Math.ceil(value / 2);
+            return res.view('qpon/search', {
+              'qpons': qpons,
+              'count': pages
+            });
           });
         });
+
     } else {
       Qpon.find()
         .where({
@@ -167,14 +162,19 @@ module.exports = {
           date: {
             '<': qDate
           }
+        }).paginate({
+          page: qPage,
+          limit: 2
         })
         .exec(function (err, qpons) {
-          return res.view('qpon/search', {
-            'qpons': qpons
+          Qpon.count().exec(function (err, value) {
+            var pages = Math.ceil(value / 2);
+            return res.view('qpon/search', {
+              'qpons': qpons,
+              'count': pages
+            });
           });
         });
     }
-
   },
-
 };
