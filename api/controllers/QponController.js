@@ -105,11 +105,11 @@ module.exports = {
     var qCoinFrom = String(params.sRange).split(';')[0] || "";
     var qCoinTo = String(params.sRange).split(';')[1] || "";
     var qDate = params.sDate || "";
-    var qPage = req.query.page || 1;
+    var qPage = Number(req.query.page) || 1;
 
     console.log(params);
     console.log("-----");
-    console.log(qDist, qCoinFrom, qCoinTo, qDate);
+    console.log(qDist, qCoinFrom, qCoinTo, qDate, qPage);
     console.log("-----");
 
 
