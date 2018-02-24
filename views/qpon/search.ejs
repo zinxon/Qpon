@@ -1,67 +1,73 @@
-<% var current = Number(req.query.page || 1); %>
-  <form action="./search?page=<%= Math.max(current-1, 1) %>" method="POST" name="search">
-    <div class="row">
-      <div class="col-12 col-lg-8">
-        <div class="row">
-          <% qpons.forEach( function(model) { %>
-            <div class="card col-12 col-lg-6" align="middle">
-              <img class="card-img-top" src="<%= model.image %>" alt="" width="280" height="220">
-              <a class="card-title card-link" href="/qpon/detail/<%= model.id %>">
-                <b>
-                  <%= model.rest %>
-                </b>
-              </a>
-              <p class="card-subtitle mb-2 text-muted">
-                <%= model.title %>
-              </p>
-              <p class="card-text">Coins:
-                <%= model.coin %>
-              </p>
-            </div>
-            <% }); %>
-        </div>
-        <br>
-
-        <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <li class="page-item">
-              <a class="page-link" href="?page=<%= Math.max(current-1, 1) %>">Previous</a>
-            </li>
-
-            <% for (i = 1; i <= count; i++) { %>
-              <li class="page-item">
-                <a class="page-link" href="?page=<%= i %>">
-                  <%= i %>
+<% var url = "search?sDist=" + req.params.all().sDist+"&sRange=" +req.params.all().sRange+"&sDate=" + req.params.all().sDate + "&"%>
+  <% var current = Number(req.query.page || 1); %>
+    <form action="./search?page=1" method="GET" name="search">
+      <div class="row">
+        <div class="col-12 col-lg-8">
+          <div class="row">
+            <% qpons.forEach( function(model) { %>
+              <div class="card col-12 col-lg-6" align="middle">
+                <img class="card-img-top" src="<%= model.image %>" alt="" width="280" height="220">
+                <a class="card-title card-link" href="/qpon/detail/<%= model.id %>">
+                  <b>
+                    <%= model.rest %>
+                  </b>
                 </a>
+                <p class="card-subtitle mb-2 text-muted">
+                  <%= model.title %>
+                </p>
+                <p class="card-text">Coins:
+                  <%= model.coin %>
+                </p>
+              </div>
+              <% }); %>
+          </div>
+          <br>
+
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item">
+                <a class="page-link" href="./<%=url%>page=<%= Math.max(current-1, 1) %>">Previous</a>
               </li>
-              <% } %>
 
+              <% for (i = 1; i <= count; i++) { %>
                 <li class="page-item">
-                  <a class="page-link" href="?page=<%= Math.min(current+1, count) %>">Next</a>
+                  <a class="page-link" href="./<%=url%>page=<%= i %>">
+                    <%= i %>
+                  </a>
                 </li>
-          </ul>
-        </nav>
-      </div>
-      <div class="col-12 col-lg-4">
-        <h5>
-          Search
-        </h5>
-        <label>District</label>
-        <select class="form-control" name="sDist">
-          <option value="all">All Districts</option>
-          <option value="hk">HK Island</option>
-          <option value="kl">Kowloon</option>
-          <option value="nt">New Territories</option>
-        </select>
-        <br>
-        <label for="">Coins Range:</label>
-        <input type="text" class="range_03 form-control" name="sRange">
-        <label>Valid Before:</label>
-        <input type="text" class="form-control datepicker" name="sDate" data-provide="datepicker">
-        <br>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </div>
-    </div>
-    <br>
+                <% } %>
 
-  </form>
+                  <li class="page-item">
+                    <a class="page-link" href="./<%=url%>page=<%= Math.min(current+1, count) %>">Next</a>
+                  </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-12 col-lg-4">
+          <h5>
+            Search
+          </h5>
+          <label>District</label>
+          <select class="form-control" name="sDist" value="<%= req.params.all().sDist%>">
+            <option value="all">All Districts</option>
+            <option value="hk">HK Island</option>
+            <option value="kl">Kowloon</option>
+            <option value="nt">New Territories</option>
+          </select>
+          <br>
+          <label for="">Coins Range:</label>
+          <input type="text" class="range_03 form-control" name="sRange" value="<%= req.params.all().sRange%>">
+          <label>Valid Before:</label>
+          <input type="text" class="form-control datepicker" name="sDate" data-provide="datepicker" value="<%= req.params.all().sDate%>">
+          <br>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+      <br>
+
+    </form>
+
+    <script>
+      document.querySelector("option[value='<%= req.params.all().sDist%>']").setAttribute("selected", "selected");
+
+    </script>

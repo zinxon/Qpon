@@ -101,7 +101,7 @@ module.exports = {
   search: function (req, res) {
 
     var params = req.params.all();
-    var qDist = params.sDist || "";
+    var qDist = params.sDist;
     var qCoinFrom = String(params.sRange).split(';')[0] || "";
     var qCoinTo = String(params.sRange).split(';')[1] || "";
     var qDate = params.sDate || "";
@@ -112,8 +112,27 @@ module.exports = {
     console.log(qDist, qCoinFrom, qCoinTo, qDate, qPage);
     console.log("-----");
 
-    var allQ = {}
-    var partQ = {}
+    var allQ = {
+      coin: {
+        '<=': qCoinTo,
+        '>=': qCoinFrom
+      },
+      date: {
+        '<': qDate
+      }
+    }
+    var partQ = {
+      district: qDist,
+      coin: {
+        '<=': qCoinTo,
+        '>=': qCoinFrom
+      },
+      date: {
+        '<': qDate
+      }
+    }
+
+
 
     if (qDist == "") {
       Qpon.find().paginate({
@@ -122,6 +141,7 @@ module.exports = {
       }).exec(function (err, qpons) {
         Qpon.count().exec(function (err, value) {
           console.log("There are ", value, " qpons!!");
+          console.log("qDist", qDist);
           var pages = Math.ceil(value / 2);
           return res.view('qpon/search', {
             'qpons': qpons,
@@ -156,6 +176,7 @@ module.exports = {
           }).exec(function (err, value) {
             console.log("There are ", value, " qpons!!");
             var pages = Math.ceil(value / 2);
+            console.log("qDist", qDist);
             return res.view('qpon/search', {
               'qpons': qpons,
               'count': pages
@@ -190,6 +211,7 @@ module.exports = {
             }
           }).exec(function (err, value) {
             console.log("There are ", value, " qpons!!");
+            console.log("qDist", qDist);
             var pages = Math.ceil(value / 2);
             return res.view('qpon/search', {
               'qpons': qpons,
