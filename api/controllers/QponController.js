@@ -132,8 +132,6 @@ module.exports = {
       }
     }
 
-
-
     if (qDist == "") {
       Qpon.find().paginate({
         page: qPage,
@@ -152,28 +150,12 @@ module.exports = {
 
     } else if (qDist == "all" && qCoinFrom != "" && qCoinTo != "" && qDate != "") {
       Qpon.find()
-        .where({
-          coin: {
-            '<=': qCoinTo,
-            '>=': qCoinFrom
-          },
-          date: {
-            '<': qDate
-          }
-        }).paginate({
+        .where(allQ).paginate({
           page: qPage,
           limit: 2
         })
         .exec(function (err, qpons) {
-          Qpon.count({
-            coin: {
-              '<=': qCoinTo,
-              '>=': qCoinFrom
-            },
-            date: {
-              '<': qDate
-            }
-          }).exec(function (err, value) {
+          Qpon.count(allQ).exec(function (err, value) {
             console.log("There are ", value, " qpons!!");
             var pages = Math.ceil(value / 2);
             console.log("qDist", qDist);
@@ -186,30 +168,12 @@ module.exports = {
 
     } else {
       Qpon.find()
-        .where({
-          district: qDist,
-          coin: {
-            '<=': qCoinTo,
-            '>=': qCoinFrom
-          },
-          date: {
-            '<': qDate
-          }
-        }).paginate({
+        .where(partQ).paginate({
           page: qPage,
           limit: 2
         })
         .exec(function (err, qpons) {
-          Qpon.count({
-            district: qDist,
-            coin: {
-              '<=': qCoinTo,
-              '>=': qCoinFrom
-            },
-            date: {
-              '<': qDate
-            }
-          }).exec(function (err, value) {
+          Qpon.count(partQ).exec(function (err, value) {
             console.log("There are ", value, " qpons!!");
             console.log("qDist", qDist);
             var pages = Math.ceil(value / 2);
