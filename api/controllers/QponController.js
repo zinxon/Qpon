@@ -104,7 +104,7 @@ module.exports = {
     var qDist = params.sDist;
     var qCoinFrom = String(params.sRange).split(';')[0] || "";
     var qCoinTo = String(params.sRange).split(';')[1] || "";
-    var qDate = params.sDate || "";
+    var qDate = params.sDate;
     var qPage = Number(req.query.page) || 1;
 
     console.log(params);
