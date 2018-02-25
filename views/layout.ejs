@@ -52,10 +52,10 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div id="navbar" class="navbar-nav">
-          <a class="nav-item nav-link active" href="/qpon/index">Home</a>
-          <a class="nav-item nav-link" href="/qpon/search">Search</a>
-          <a class="nav-item nav-link" href="/qpon/create">Create</a>
-          <a class="nav-item nav-link" href="/qpon/admin">Admin</a>
+          <a class="nav-item nav-link <%= req.path=='/qpon/index'?'active':''%>" href="/qpon/index">Home</a>
+          <a class="nav-item nav-link <%= req.path=='/qpon/search'?'active':''%>" href="/qpon/search">Search</a>
+          <a class="nav-item nav-link <%= req.path=='/qpon/create'?'active':''%>" href="/qpon/create">Create</a>
+          <a class="nav-item nav-link <%= req.path=='/qpon/admin'?'active':''%>" href="/qpon/admin">Admin</a>
         </div>
       </div>
     </nav>
@@ -161,12 +161,5 @@
   $(function () {
     $('.datepicker').datepicker();
   });
-
-  // $(function () {
-  //   $('div a').click(function () {
-  //     $('a').removeClass("active");
-  //     $(this).addClass("active");
-  //   });
-  // });
 
 </script>
