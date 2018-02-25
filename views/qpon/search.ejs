@@ -1,3 +1,4 @@
+<!--search.ejs-->
 <% var url = "search?sDist=" + req.params.all().sDist+"&sRange=" +req.params.all().sRange+"&sDate=" + req.params.all().sDate + "&"%>
   <% var current = Number(req.query.page || 1); %>
     <form action="./search?page=1" method="GET" name="search">
@@ -57,7 +58,8 @@
           <label for="">Coins Range:</label>
           <input type="text" class="range_03 form-control" name="sRange" value="<%= req.params.all().sRange%>">
           <label>Valid Before:</label>
-          <input type="text" class="form-control datepicker" name="sDate" data-provide="datepicker" value="<%= req.params.all().sDate || ""%>">
+          <input type="text" class="form-control datepicker" name="sDate" data-provide="datepicker" value="<%= req.params.all().sDate || "
+            "%>">
           <br>
           <button type="submit" class="btn btn-primary">Submit</button>
         </div>
@@ -65,7 +67,7 @@
       <br>
 
     </form>
-
     <script>
       document.querySelector("option[value='<%= req.params.all().sDist%>']").setAttribute("selected", "selected");
+
     </script>

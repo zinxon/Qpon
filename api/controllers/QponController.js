@@ -25,7 +25,7 @@ module.exports = {
     });
   },
 
-  //admin functino
+  // admin functino
   admin: function (req, res) {
     Qpon.find().exec(function (err, qpons) {
       return res.view('qpon/admin', {
@@ -34,7 +34,7 @@ module.exports = {
     });
   },
 
-  //index function
+  // index function
   index: function (req, res) {
     Qpon.find().exec(function (err, qpons) {
       return res.view('qpon/index', {
@@ -43,7 +43,7 @@ module.exports = {
     });
   },
 
-  //detail function
+  // detail function
   detail: function (req, res) {
     if (req.method == "GET") {
       Qpon.findOne(req.params.id).exec(function (err, model) {
