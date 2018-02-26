@@ -107,10 +107,10 @@ module.exports = {
     var qDate = params.sDate;
     var qPage = Number(req.query.page) || 1;
 
-    console.log(params);
-    console.log("-----");
-    console.log(qDist, qCoinFrom, qCoinTo, qDate, qPage);
-    console.log("-----");
+    // console.log(params);
+    // console.log("-----");
+    // console.log(qDist, qCoinFrom, qCoinTo, qDate, qPage);
+    // console.log("-----");
 
     var allQ = {
       coin: {
