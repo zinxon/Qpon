@@ -118,7 +118,7 @@ module.exports = {
         '>=': qCoinFrom
       },
       date: {
-        '<=': qDate
+        '<=': new Date(qDate)
       }
     }
     var partQ = {
@@ -128,7 +128,7 @@ module.exports = {
         '>=': qCoinFrom
       },
       date: {
-        '<=': qDate
+        '<=': new Date(qDate)
       }
     }
 

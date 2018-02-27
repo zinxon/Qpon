@@ -18,8 +18,15 @@
         </li>
         <li class="list-group-item">
           <strong>Address:</strong>
+
           <%= qpon.mall%>,
-            <%= qpon.district%>
+            <% if (qpon.district=="hk") {%>
+              HK Island
+                <% }else if (qpon.district=="kl" ) {%>
+                  Kowloon
+                    <% }else if (qpon.district=="nt") {%>
+                      New Territories
+                      <% }%>
         </li>
         <li class="list-group-item">
           <strong>Valid Till:</strong>
